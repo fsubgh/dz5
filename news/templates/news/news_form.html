@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новость</title>
+</head>
+<body>
+    <h1>Создание или редактирование новости</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <p><a href="{% url 'news_list' %}">Вернуться к новостям</a></p>
+</body>
+</html>

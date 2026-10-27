@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+    <h1>Последние новости</h1>
+
+    <p><a href="{% url 'category_list' %}">Все категории</a></p>
+
+    {% for item in news_list %}
+        <article>
+            <h2>
+                <a href="{% url 'news_detail' item.pk %}">
+                    {{ item.title }}
+                </a>
+            </h2>
+            <p>Категория: {{ item.category.name }}</p>
+            <p>Автор: {{ item.author.username }}</p>
+            <p>Дата: {{ item.created_at|date:"d.m.Y H:i" }}</p>
+            <p>{{ item.content|truncatewords:25 }}</p>
+        </article>
+        <hr>
+        <h2>Категории</h2>
+
+<ul>
+    {% for category in categories %}
+        <li>
+            {{ category.name }} — {{ category.news_count }} новостей
+        </li>
+    {% empty %}
+        <li>Категорий пока нет.</li>
+    {% endfor %}
+</ul>
+    {% empty %}
+        <p>Новостей пока нет.</p>
+    {% endfor %}
+</body>
+</html>
